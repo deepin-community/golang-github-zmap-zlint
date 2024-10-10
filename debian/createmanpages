@@ -1,0 +1,37 @@
+#!/bin/sh
+MANDIR=debian
+mkdir -p $MANDIR
+
+VERSION=`dpkg-parsechangelog | awk '/^Version:/ {print $2}' | sed -e 's/^[0-9]*://' -e 's/-.*//' -e 's/[+~]dfsg$//'`
+NAME=`grep "^Description:" debian/control | sed 's/^Description: *//' | head -n1`
+PROGNAME=`grep "^Package:" debian/control | sed 's/^Package: *//' | head -n1`
+
+AUTHOR=".SH AUTHOR\n\
+This manpage was written by $DEBFULLNAME for the Debian\n\
+distribution and can be used for any other usage of the program.\
+"
+
+# If program name is different from package name or title should be
+# different from package short description change this here
+for progname in zlint zlint-gtld-update
+do 
+    help2man --no-info --no-discard-stderr --help-option="--help" \
+             --name="$NAME" \
+             --include="${MANDIR}/zlint-generic.h2m" \
+             --version-string="$VERSION" ${progname} > $MANDIR/${progname}.1
+    echo $AUTHOR >> $MANDIR/${progname}.1
+
+    cat <<EOT
+Wrote help2man output to '$MANDIR/${progname}.1'.
+To inspect it, try 'nroff -man $MANDIR/${progname}.1'.
+
+EOT
+done
+
+echo "$MANDIR/*.1" > debian/manpages
+
+cat <<EOT
+If very unhappy, try passing the HELPOPTION as an environment variable.
+The following web page might be helpful in doing so:
+    http://liw.fi/manpages/
+EOT

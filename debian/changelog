@@ -1,5 +1,28 @@
-template-repository (1.0-1) unstable; urgency=medium
+golang-github-zmap-zlint (3.6.2-4) unstable; urgency=medium
 
-  * Initial release
+  * zlint: Avoid depends on dev packages, Closes: #1074778
 
- -- Tsic404 <liuheng@deepin.org>  Sat, 28 Jan 2023 13:46:49 +0800
+ -- Reinhard Tartler <siretart@tauware.de>  Wed, 03 Jul 2024 06:08:06 -0400
+
+golang-github-zmap-zlint (3.6.2-3) unstable; urgency=medium
+
+  * No-change upload to aid testing migration
+
+ -- Reinhard Tartler <siretart@tauware.de>  Sat, 29 Jun 2024 17:16:17 -0400
+
+golang-github-zmap-zlint (3.6.2-2) unstable; urgency=medium
+
+  * Produce the 'zlint' package for the zlint utility
+
+ -- Reinhard Tartler <siretart@tauware.de>  Sat, 22 Jun 2024 10:22:08 -0400
+
+golang-github-zmap-zlint (3.6.2-1) unstable; urgency=medium
+
+  [ Peymaneh Nejad ]
+  * Initial release (Closes: #990200)
+
+  [ Reinhard Tartler ]
+  * New upstream release
+
+ -- Reinhard Tartler <siretart@tauware.de>  Wed, 19 Jun 2024 10:45:16 -0400
+

@@ -1,4 +1,16 @@
 #!/usr/bin/make -f
 
+export DH_GOPKG := github.com/zmap/zlint
+export DH_GOLANG_EXCLUDES := testdata/
+export DH_GOLANG_BUILDPKG := github.com/zmap/zlint/v3/cmd/zlint github.com/zmap/zlint/v3/cmd/zlint-gtld-update
+
+include /usr/share/dpkg/pkg-info.mk
+VERSION = $(shell echo $(DEB_VERSION) | cut -d- -f1)
+LDFLAGS := -ldflags '-X "main.version=$(VERSION)"'
+
 %:
-	dh $@
+	dh $@ --builddirectory=_build --buildsystem=golang --with=golang
+
+override_dh_auto_build:
+	dh_auto_build -- $(LDFLAGS)
+
